@@ -7,10 +7,10 @@ C++17, CMake 3.14+, Google Test 1.14.0, cpplint.
 
 ## Скачать проект
 
-Подставьте ссылку своего репозитория вместо REPOSITORY_URL:
+Клонируйте репозиторий и переключитесь на ветку с библиотекой Vector:
 
 ```bash
-git clone REPOSITORY_URL ADS
+git clone https://github.com/chardi60666/Algorithms-and-Data-Structures.git ADS
 cd ADS
 git switch dev
 git submodule sync
