@@ -1,13 +1,39 @@
-# GitHub Action to run cpplint recursively on all pushes and pull requests
-# https://github.com/cpplint/GitHub-Action-for-cpplint
-
 name: cpplint
+
 on: [push, pull_request]
+
+permissions:
+  contents: read
+
 jobs:
   cpplint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-    - run: pip install cpplint
-    - run: cpplint --exclude="trird_party/*" --recursive .
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python -m pip install cpplint==2.0.2
+      - run: cpplint --recursive lib_easy_example lib_vector main tests
+
+  build-and-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Configure
+        run: cmake -S . -B build -DBTEST=ON
+      - name: Build
+        run: cmake --build build --config Release --parallel 2
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Run application (Linux)
+        if: runner.os == 'Linux'
+        run: ./build/main/Application
+      - name: Run application (Windows)
+        if: runner.os == 'Windows'
+        run: ./build/main/Release/Application.exe

@@ -1,37 +1,33 @@
 // Copyright 2024 Marina Usova
 
-#define EASY_EXAMPLE
-#ifdef EASY_EXAMPLE
-
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+#include <stdexcept>
+
 #include "../lib_easy_example/easy_example.h"
+#include "../lib_vector/tvector.h"
 
 int main() {
-  int a, b;
-  float result;
-
-  a = 1; b = 4;
-
   try {
-      result = division(a, b);
-      std::cout << a << " / " << b << " = "
-          << std::setprecision(2) << result << std::endl;
-  } catch (std::exception err) {
-      std::cerr << err.what() << std::endl;
+    std::cout << "EasyExample: " << 1 << " / " << 4 << " = "
+              << std::setprecision(2) << division(1, 4) << '\n';
+  } catch (const std::exception& error) {
+    std::cerr << error.what() << '\n';
   }
 
-  a = 1; b = 0;
-
   try {
-      result = division(a, b);
-      std::cout << a << " / " << b << " = "
-          << std::setprecision(2) << result << std::endl;
-  } catch (std::exception err) {
-      std::cerr << err.what() << std::endl;
+    const float result = division(1, 0);
+    std::cout << "EasyExample: " << result << '\n';
+  } catch (const std::exception& error) {
+    std::cerr << error.what() << '\n';
   }
 
+  TVector<int> values{10, 20, 30};
+  values.push_back(40);
+  std::cout << "Vector: ";
+  for (const auto& value : values) {
+    std::cout << value << ' ';
+  }
+  std::cout << '\n';
   return 0;
 }
-
-#endif  // EASY_EXAMPLE

@@ -1,29 +1,27 @@
-﻿# указывайте последнюю доступную вам версию CMake
-
 cmake_minimum_required(VERSION 3.14)
-set(CMAKE_CXX_STANDARD 14)
+
+project(Algorithms-and-Data-Structures LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# название проекта
-project(Algorithms-and-Data-Structures)
+include(cmake/function.cmake)
 
-# затем следует список инструкций для подключения проектов из подкаталогов
+# Libraries must be registered before applications and tests.
+add_subdirectory(lib_easy_example)
+add_subdirectory(lib_vector)
+add_subdirectory(main)
 
-include(cmake/function.cmake)         # подхватываем функции, реализованные в файле function.cmake
-                                      # для простоты мы объединили наборы команд для создания статической библиотеки
-								      # и для создания исполняемого проекта в отдельные функции
-
-add_subdirectory(lib_easy_example)    # подключаем дополнительный CMakeLists.txt из подкаталога с именем lib_easy_example
-
-add_subdirectory(main)                # подключаем дополнительный CMakeLists.txt из подкаталога с именем main
-
-option(BTEST "build test?" ON)        # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)
-
-if(BTEST)                             # если тесты подключены         
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    add_subdirectory("third_party/gtest" EXCLUDE_FROM_ALL)
-    enable_testing()
-    add_subdirectory(tests)
+option(BTEST "Build Google Test tests" ON)
+if(BTEST)
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/third_party/gtest/CMakeLists.txt")
+    message(FATAL_ERROR
+      "Google Test is missing. Run: "
+      "git submodule update --init --recursive")
+  endif()
+  add_subdirectory(third_party/gtest EXCLUDE_FROM_ALL)
+  enable_testing()
+  add_subdirectory(tests)
 endif()
-
-
