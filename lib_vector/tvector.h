@@ -18,7 +18,6 @@ class TVector {
   using value_type = T;
   using size_type = std::size_t;
 
-  // A random-access iterator with a const/non-const variant.
   template <bool IsConst>
   class BaseIterator {
    public:
