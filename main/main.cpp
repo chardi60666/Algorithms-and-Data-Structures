@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 #include "../lib_easy_example/easy_example.h"
-#include "../lib_vector/tvector.h"
+#include "TVector.h"
 
 int main() {
   try {

@@ -1,4 +1,5 @@
 // Copyright 2026 ADS student project
+// Copyright 2024 Marina Usova
 
 #include <gtest/gtest.h>
 
@@ -7,8 +8,9 @@
 #include <string>
 #include <utility>
 
-#include "../lib_vector/tmemdata.h"
-#include "../lib_vector/tvector.h"
+#include "../lib_easy_example/easy_example.h"
+#include "TMemData.h"
+#include "TVector.h"
 
 namespace {
 
@@ -159,7 +161,6 @@ TEST(TVectorTest, EmptyIteratorsMatch) {
   EXPECT_TRUE(vector.empty());
 }
 
-// A value that fails only when assigned into the vector's storage.
 struct ThrowingValue {
   static bool fail_assignment;
   int value = 0;
@@ -195,5 +196,24 @@ TEST(TVectorTest, FailedPushDoesNotChangeSize) {
     EXPECT_EQ(7, vector[0].value);
   }
 }
+
+constexpr float kEpsilon = 0.000001f;
+
+TEST(TestEasyExampleLib, CanDivide) {
+  EXPECT_NO_THROW(division(10, 2));
+}
+
+TEST(TestEasyExampleLib, DividesCorrectly) {
+  EXPECT_FLOAT_EQ(3.0f, division(6, 2));
+}
+
+TEST(TestEasyExampleLib, DivisionWithRemainder) {
+  EXPECT_NEAR(1.25f, division(5, 4), kEpsilon);
+}
+
+TEST(TestEasyExampleLib, ThrowsOnDivisionByZero) {
+  EXPECT_THROW(division(10, 0), std::invalid_argument);
+}
+
 
 }  // namespace

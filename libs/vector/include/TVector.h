@@ -1,7 +1,7 @@
 // Copyright 2026 ADS student project
 
-#ifndef LIB_VECTOR_TVECTOR_H_
-#define LIB_VECTOR_TVECTOR_H_
+#ifndef LIBS_VECTOR_INCLUDE_TVECTOR_H_
+#define LIBS_VECTOR_INCLUDE_TVECTOR_H_
 
 #include <cstddef>
 #include <initializer_list>
@@ -10,7 +10,7 @@
 #include <type_traits>
 #include <utility>
 
-#include "../lib_vector/tmemdata.h"
+#include "TMemData.h"
 
 template <class T>
 class TVector {
@@ -288,4 +288,4 @@ class TVector {
   size_type size_ = 0;
 };
 
-#endif  // LIB_VECTOR_TVECTOR_H_
+#endif  // LIBS_VECTOR_INCLUDE_TVECTOR_H_

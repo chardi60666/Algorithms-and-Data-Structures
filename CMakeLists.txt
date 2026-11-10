@@ -13,11 +13,11 @@ add_library(EasyExample STATIC
 target_include_directories(EasyExample PUBLIC lib_easy_example)
 
 add_library(Vector STATIC
-  lib_vector/tvector.cpp
-  lib_vector/tvector.h
-  lib_vector/tmemdata.h
+  libs/vector/src/TVector.cpp
+  libs/vector/include/TVector.h
+  libs/vector/include/TMemData.h
 )
-target_include_directories(Vector PUBLIC lib_vector)
+target_include_directories(Vector PUBLIC libs/vector/include)
 
 add_executable(Application main/main.cpp)
 target_link_libraries(Application PRIVATE EasyExample Vector)
@@ -33,13 +33,11 @@ if(BTEST)
       "Google Test is missing. Run: "
       "git submodule update --init --recursive")
   endif()
+  set(BUILD_GMOCK OFF)
   add_subdirectory(third_party/gtest EXCLUDE_FROM_ALL)
   enable_testing()
 
-  add_executable(AllTests
-    tests/test_easy_example.cpp
-    tests/test_vector.cpp
-  )
+  add_executable(AllTests tests/test_all.cpp)
   target_link_libraries(AllTests PRIVATE EasyExample Vector gtest_main)
   set_target_properties(AllTests PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/tests"

@@ -1,7 +1,7 @@
 // Copyright 2026 ADS student project
 
-#ifndef LIB_VECTOR_TMEMDATA_H_
-#define LIB_VECTOR_TMEMDATA_H_
+#ifndef LIBS_VECTOR_INCLUDE_TMEMDATA_H_
+#define LIBS_VECTOR_INCLUDE_TMEMDATA_H_
 
 #include <cstddef>
 #include <utility>
@@ -70,4 +70,4 @@ class TMemData {
   size_type capacity_ = 0;
 };
 
-#endif  // LIB_VECTOR_TMEMDATA_H_
+#endif  // LIBS_VECTOR_INCLUDE_TMEMDATA_H_
