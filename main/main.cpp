@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include "../lib_easy_example/easy_example.h"
+#include "lib_structures/brackets.h"
 
 int main() {
   int a, b;
@@ -31,6 +32,9 @@ int main() {
       std::cerr << err.what() << std::endl;
   }
 
+  std::cout << std::boolalpha;
+  std::cout << "([{}]): " << has_balanced_brackets("([{}])") << '\n';
+  std::cout << "([)]: " << has_balanced_brackets("([)]") << '\n';
   return 0;
 }
 
