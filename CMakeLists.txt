@@ -18,7 +18,7 @@ add_library(List STATIC lib_list/list.cpp lib_list/list.h)
 target_include_directories(List PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(DS_APP main/main.cpp)
-target_link_libraries(DS_APP PRIVATE Algorithms)
+target_link_libraries(DS_APP PRIVATE Algorithms List)
 set_target_properties(DS_APP PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/main"
 )
